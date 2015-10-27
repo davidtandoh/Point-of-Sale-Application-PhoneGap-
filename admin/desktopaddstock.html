@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Add To Stock</title>
+        <script src="jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+           
+	</head>
+		<body>
+            
+			<form class = "contact_form" method="get">
+				Barcode reading: <input id="barcode" type="text" placeholder="Barcode Reading" required><br />
+                Product name: <input id="pname" type="text" placeholder="product name" required><br />
+                Price: <input id="price" type="text" placeholder="price" required><br />
+                Quantity: <input id ="quantity" type="text" placeholder="quantity"  required><br />
+                <br />
+				<input type="submit" id = "submitBtn" name="button" value="Insert">
+			</form>
+            
+        <script type="text/javascript">
+                    
+        $(function(){
+         $("#submitBtn").click(function(){
+            addstock();
+        });
+            
+        function sendRequest(u){
+            // Send request to server
+            //u a url as a string
+            //async is type of request
+            var obj=$.ajax({url:u,async:false});
+            //Convert the JSON string to object
+            var result=$.parseJSON(obj.responseText);
+            return result;	//return object	
+        }
+        
+        function addstock(){
+            alert("i add");
+            var br = $("#barcode").val();
+            var pn = $("#pname").val();
+            var pr = $("#price").val();
+            var qt = $("#quantity").val();
+            var url = "controller.php?cmd=1&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"";
+            var obj = sendRequest(url);   
+            if(obj.result == 1){
+                alert("Added successfully");
+            }
+            else{
+            }
+        }
+        });
+    </script>
+		</body>
+</html>
