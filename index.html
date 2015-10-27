@@ -95,8 +95,7 @@
             <h1>Tanoe Concepts</h1>
         </div>
     </div>
-    <script>
-         $(document).ready(function(){   
+    <script> 
         function sendRequest(u){
             // Send request to server
             //u a url as a string
@@ -107,7 +106,7 @@
             return result;	//return object	
         }
             
-            function scan(){     
+    function scan(){     
     cordova.plugins.barcodeScanner.scan(
       function (result) {
           var str = result.text;
@@ -151,7 +150,6 @@
             alert("encoding failed: " + fail);
           }
         );
-         });
         </script>
 </body>
 </html>
