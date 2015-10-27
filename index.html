@@ -11,7 +11,7 @@
    
 </head>
 <body>
-    <div data-role="page" id="pageone" data-theme="c">
+    <!--<div data-role="page" id="pageone" data-theme="c">
         <div data-role="header">
             <a href="#pageone" data-role="button">Home</a>
             <a href="" data-role="button">Options</a>
@@ -28,7 +28,7 @@
                     <label for="Password">Password:</label>
                     <input type="text" name="password" id="password"/> 
                     <a href="#pagetwo" data-role="button">login</a>
-                    <!--<input type="submit" value="login" id="loginBtn" onclick="login()">-->
+                    <!--<input type="submit" value="login" id="loginBtn" onclick="login()">
                 </div>
             </form>
             
@@ -36,8 +36,8 @@
         <div data-role="footer">
             <h1>Tanoe Concepts</h1>
         </div>
-    </div>
-    <div data-role="page" id="pagetwo" data-theme="c">
+    </div>-->
+    <div data-role="page" id="pageone" data-theme="c">
         <div data-role="header">
             <a href="#pageone" data-role="button">Home</a>
             <a href="" data-role="button">Options</a>
@@ -72,9 +72,32 @@
         <div data-role="footer">
             <h1>Tanoe Concepts</h1>
         </div>
-        <script>
+    </div>
+        <div data-role="page" id="pagethree" data-theme="c">
+        <div data-role="header">
+            <a href="#pageone" data-role="button">Home</a>
+            <a href="" data-role="button">Options</a>
+            <h1>Tanoe POS</h1>
+            <div data-role="navbar">
+            </div>
+        </div>
+        <div role="main" class = "ui-content">
+            <form method="post">
+                <div data-role="fieldcontain">
+
+                    <label for="customerphone">Customer Phone:</label>
+                    <input type="text" name="customerphone" id="customerphone"/> 
+                </div>
+            </form>
             
-            function sendRequest(u){
+        </div>
+        <div data-role="footer">
+            <h1>Tanoe Concepts</h1>
+        </div>
+    </div>
+    <script>
+         $(document).ready(function(){   
+        function sendRequest(u){
             // Send request to server
             //u a url as a string
             //async is type of request
@@ -122,64 +145,7 @@
             alert("encoding failed: " + fail);
           }
         );
+         });
         </script>
-    </div>
-        <div data-role="page" id="pagethree" data-theme="c">
-        <div data-role="header">
-            <a href="#pageone" data-role="button">Home</a>
-            <a href="" data-role="button">Options</a>
-            <h1>Tanoe POS</h1>
-            <div data-role="navbar">
-            </div>
-        </div>
-        <div role="main" class = "ui-content">
-            <form method="post">
-                <div data-role="fieldcontain">
-
-                    <label for="customerphone">Customer Phone:</label>
-                    <input type="text" name="customerphone" id="customerphone"/> 
-                </div>
-            </form>
-            
-        </div>
-        <div data-role="footer">
-            <h1>Tanoe Concepts</h1>
-        </div>
-    </div>
-        <script>
-        
-        $(function(){
-         $("#submitBtn").click(function(){
-            addRecord();
-        });
-            
-        function sendRequest(u){
-            // Send request to server
-            //u a url as a string
-            //async is type of request
-            var obj=$.ajax({url:u,async:false});
-            //Convert the JSON string to object
-            var result=$.parseJSON(obj.responseText);
-            return result;	//return object	
-        }
-        
-        function addRecord(){
-            var sn = $("#studentname").val();
-            var si = $("#studentid").val();
-            var gpa = $("#gpa").val();
-            var mj = $("#major").val();
-            var url = "studentcases.php?cmd=1&studentname="+sn+"&studentid="+si+"&gpa="+gpa+"&major="+mj+"";
-            var obj = sendRequest(url);   
-            if(obj.result == 1){
-            }
-            else{
-            }
-        }
-        });
-            
-        
-    
-    
-    </script>
 </body>
 </html>
