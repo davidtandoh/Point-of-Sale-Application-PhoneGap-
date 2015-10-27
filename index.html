@@ -114,18 +114,24 @@
           var price;
           
           $("#barcodereading").text(str);
-          var url = "controller.php?cmd=4&barcodereading="+str+"";
+          var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/controller.php?cmd=4&barcodereading="+str+"";
           var obj = sendRequest(url);   
           if(obj.result == 1){
               $("#productname").text(obj.stock[0].name);
               $("#price").text(obj.stock[0].price);
+                 
+          alert("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Name: " + obj.stock[0].price+ "\n" +
+                "Cancelled: " + result.cancelled);
+          $("#reading").val(result.text);
           }
             else{
             }
           
-          /**alert("We got a barcode\n" +
+         /** alert("We got a barcode\n" +
                 "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
+                "Name: " + obj.stock[0].price+ "\n" +
                 "Cancelled: " + result.cancelled);
           $("#reading").val(result.text);**/
       }, 
