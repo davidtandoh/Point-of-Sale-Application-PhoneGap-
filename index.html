@@ -63,7 +63,7 @@
                    
                     
                    
-                    <input type="submit" value="Add Order" id="addorder" onclick="addorder()">
+                    <input type="submit" value="Add Order" id="addorder">
                 </div>
             </form>
             
@@ -95,7 +95,6 @@
         </div>
     </div>
     <script type="text/javascript"> 
-    $('#pageone').live('pageinit',function(){
         function sendRequest(u){
             // Send request to server
             //u a url as a string
@@ -142,10 +141,27 @@
       }
    );
 });
-     });
-            function addorder(){
+                
+  
+        $("#addorder").click(function(){     
+            alert("add");
+            var br = $("#barcodereading").val();
+            var pn = $("#productname").val();
+            var pr = $("#price").val();
+            var qt = $("#quantity").val();
+            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"";
+            var obj = sendRequest(url);   
+            if(obj.result == 1){
+                alert("Added successfully");
             }
-            
+            else{
+            }
+        }); 
+         
+         
+         
+     });
+
 
          
           cordova.plugins.barcodeScanner.encode(cordova.plugins.barcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com", function(success) {
@@ -154,7 +170,6 @@
             alert("encoding failed: " + fail);
           }
         );
-    }); 
         </script>
 </body>
 </html>

@@ -19,6 +19,8 @@
     case 4:
 		getnameandprice();
 		break;
+    case 5:
+        addorder();
     
 	default:
 		echo '{"result":0,message:"unknown command"}';
@@ -133,6 +135,21 @@ function getnameandprice(){
         { 
             echo "Failed get name for barcode reading";
         }
+}
+
+function addorder(){
+        require_once("orders.php");
+        $barcode = $_REQUEST['barcode'];
+        $name =$_REQUEST['name'];
+        $price=$_REQUEST['price'];
+        $quantity = $_REQUEST['quantity'];
+        $obj = new order();
+        if($obj->addorder($barcode,$name,$price,$quantity)){
+		echo '{"result":1,"message": "Record added succesfully"}';
+	   }
+        else{
+		echo '{"result":0,"message": "Error adding record."}';
+	   }
 }
 
 ?>
