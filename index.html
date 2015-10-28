@@ -53,7 +53,7 @@
                     <input type="text" name="barcode" id="barcodereading"/>
                     
                     <label for="productname">Product name</label>
-                    <input type="text" name="productname" id="productname"/>
+                    <input type="text" id="productname" name="productname" />
                     
                     <label for="price">Price:</label>
                     <input type="text" name="price" id="price"/>
@@ -114,17 +114,18 @@
           var price;
           
           $("#barcodereading").text(str);
+          
           var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/controller.php?cmd=4&barcodereading="+str+"";
           var obj = sendRequest(url);   
           if(obj.result == 1){
-              $("#productname").text(obj.stock[0].name);
-              $("#price").text(obj.stock[0].price);
+              $("#productname").val(obj.stock[0].name);
+              $("#price").val(obj.stock[0].price);
                  
-          alert("We got a barcode\n" +
+          /**alert("We got a barcode\n" +
                 "Result: " + result.text + "\n" +
                 "Name: " + obj.stock[0].price+ "\n" +
                 "Cancelled: " + result.cancelled);
-          $("#reading").val(result.text);
+          $("#reading").val(result.text);**/
           }
             else{
             }
