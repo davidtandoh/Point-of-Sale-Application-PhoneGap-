@@ -107,7 +107,7 @@
         }
             
      $(function(){    
-        $("scanBtn").click(function(){    
+        $("#scanBtn").click(function(){    
     cordova.plugins.barcodeScanner.scan(
       function (result) {
           var str = result.text;
