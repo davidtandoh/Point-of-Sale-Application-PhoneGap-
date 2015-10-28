@@ -5,8 +5,8 @@ class orders extends adb
     
     function orders(){}
     
-    function addorder($barcode, $name,$price,$quantity){
-        $insert_query = "insert into orders set barcodereading ='$barcode',name='$name', price='$price',quantity='$quantity'";
+    function addorder($barcode, $name,$price,$quantity,$phone){
+        $insert_query = "insert into orders set barcodereading ='$barcode',name='$name', price='$price',quantity='$quantity',phone='$phone'";
 		return $this->query($insert_query);
     }
     
@@ -26,7 +26,7 @@ class orders extends adb
     }
     
     function getpriceofOrder($barcode){
-        $select_query = "select price from order where barcodereading='$barocde'";
+        $select_query = "select price from order where barcodereading='$barcode'";
         return $this->query($select_query);
     }
     

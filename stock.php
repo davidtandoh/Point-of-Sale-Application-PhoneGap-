@@ -30,6 +30,11 @@ class stock extends adb
         return $this->query($select_query);
     }
     
+    function updatequantity($barcode,$quantity)
+    {
+        $update_query = "update stock set quantity=(quantity-'$quantity') where barcodereading ='$barcode'";
+        return $this->query($update_query);
+    }
     
 
 }

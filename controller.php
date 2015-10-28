@@ -21,6 +21,16 @@
 		break;
     case 5:
         addorder();
+        break;
+    case 6:
+        updatestockquantity();
+        break;
+    case 7:
+        senddiscountmessage();
+        break;
+    case 8:
+        getnameandpriceApv();
+        break;
     
 	default:
 		echo '{"result":0,message:"unknown command"}';
@@ -137,19 +147,67 @@ function getnameandprice(){
         }
 }
 
+function getnameandpriceApv(){
+    require_once("stock.php");
+        $obj=new stock();
+        $barcode= $_REQUEST['barcodereading'];
+          
+       if ($obj->getnameandprice($barcode))
+        {
+        $row=$obj->getnameandprice($barcode);
+        //echo '{"result":1 ,"stock":[';
+        while($row){
+            //echo json_encode($row);
+            $row = $obj->fetch();
+                echo $row["name"];
+                echo ",";
+                echo $row["price"];
+                if($row = $obj->fetch()){
+                    echo ",";
+                }
+        }
+    //echo "]}";
+    
+        }
+        else
+        { 
+            echo "Failed get name for barcode reading";
+        }
+}
+
 function addorder(){
         require_once("orders.php");
         $barcode = $_REQUEST['barcode'];
         $name =$_REQUEST['name'];
         $price=$_REQUEST['price'];
         $quantity = $_REQUEST['quantity'];
-        $obj = new order();
-        if($obj->addorder($barcode,$name,$price,$quantity)){
+        $phone = $_REQUEST['customerphone'];
+        $obj = new orders();
+        if($obj->addorder($barcode,$name,$price,$quantity,$phone)){
 		echo '{"result":1,"message": "Record added succesfully"}';
+            if(($price * $quantity) > 500){
+                send_mesg();
+            }
 	   }
         else{
 		echo '{"result":0,"message": "Error adding record."}';
 	   }
 }
+
+    function updatestockquantity(){
+        require_once("stock.php");
+        $barcode= $_REQUEST['barcode'];
+        $quantity = $_REQUEST['quantity'];
+        $obj = new stock();
+        if($obj->updatequantity($barcode,$quantity)){
+		echo '{"result":1,"message": "Record updated succesfully"}';
+	   }
+        else{
+		echo '{"result":0,"message": "Error updating record."}';
+	   }
+    }
+
+    
+       
 
 ?>

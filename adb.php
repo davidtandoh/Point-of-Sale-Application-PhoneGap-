@@ -8,9 +8,9 @@
 
 define("DB_HOST", 'localhost');
 define("DB_NAME", 'csashesi_david-tandoh');
-define("DB_PORT", 3306);
+//define("DB_PORT", 3306);
 define("DB_USER","csashesi_dat16");
-//define("DB_PWORD","db!-LEmZ");
+define("DB_PWORD","db!-LEmZ");
 
 define("LOG_LEVEL_SEC",0);
 define("LOG_LEVEL_DB_FAIL",0);
