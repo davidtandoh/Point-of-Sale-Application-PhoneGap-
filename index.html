@@ -4,8 +4,8 @@
 </head>
 <body>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="jquery-2.1.4.min.js"></script>
     <script src = "cordova.js"></script>
-    <script src="jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="pos.css"/>
     <link rel="stylesheet" href="jquery.mobile.icons.min.css"/>
     <link rel="stylesheet" href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"/>
@@ -95,6 +95,7 @@
         </div>
     </div>
     <script type="text/javascript"> 
+    $('#pageone').live('pageinit',function(){
         function sendRequest(u){
             // Send request to server
             //u a url as a string
@@ -153,6 +154,7 @@
             alert("encoding failed: " + fail);
           }
         );
+    }); 
         </script>
 </body>
 </html>
