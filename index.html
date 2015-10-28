@@ -96,6 +96,7 @@
         </div>
     </div>
     <script type="text/javascript"> 
+        $(document).ready(function(){
         function sendRequest(u){
             // Send request to server
             //u a url as a string
@@ -118,6 +119,7 @@
           if(obj.result == 1){
               $("#productname").val(obj.stock[0].name);
               $("#price").val(obj.stock[0].price);
+              document.getElementById('price').value = obj.stock[0].price;
                  
           /**alert("We got a barcode\n" +
                 "Result: " + result.text + "\n" +
@@ -150,6 +152,7 @@
             alert("encoding failed: " + fail);
           }
         );
+        });
         </script>
 </body>
 </html>
