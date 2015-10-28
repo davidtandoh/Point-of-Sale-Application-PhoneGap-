@@ -48,7 +48,7 @@
         <div role="main" class = "ui-content">
             <form method="post">
                 <div data-role="fieldcontain">
-                    <input type="submit" value="Scan" id="scanBtn" onclick="scan()">
+                    <input type="submit" value="Scan" id="scanBtn">
                     <label for="barcodereading">Barcode reading</label>
                     <input type="text" name="barcode" id="barcodereading"/>
                     
@@ -106,13 +106,15 @@
             return result;	//return object	
         }
             
-    function scan(){     
+    $(function(){    
+        $("scanBtn").click(function(){
     cordova.plugins.barcodeScanner.scan(
       function (result) {
           var str = result.text;
           var price;
           
           $("#barcodereading").text(str);
+          
           var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/controller.php?cmd=4&barcodereading="+str+"";
           var obj = sendRequest(url);   
           if(obj.result == 1){
@@ -139,7 +141,9 @@
           alert("Scanning failed: " + error);
       }
    );
-}
+});
+        
+    });
             function addorder(){
             }
             
