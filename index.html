@@ -164,8 +164,9 @@
                     output += "<li><p>Product Name: "+pn+"<p><br />Price: "+pr+"</p><br />Quantity: "+qt+"<p></p></li>";
      
             
-                $("#orderlist").append(output);
+                $("#listdiv").append(output).listview("refresh");
                 $("#listdiv").listview("refresh");
+                $("#orderlist").listview("refresh");
                 //updatestock(br,qt);
             }
             else{
