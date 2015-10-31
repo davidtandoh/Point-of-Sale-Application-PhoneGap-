@@ -10,6 +10,87 @@
     
 </head>
 <body>
+         <script type="text/javascript"> 
+        //$.support.cors = true;
+            
+        /**$(document).ready(function(){
+         $("#scanBtn").click(function(){ 
+            scan();
+        });
+            
+        $("#addorder").click(function(){   
+            addorder();
+        });
+        **/
+            
+        function sendRequest(u){
+            var obj=$.ajax({url:u,async:false});
+            var result=$.parseJSON(obj.responseText);
+            return result;	
+        }
+            
+            
+    function scan(){
+    cordova.plugins.barcodeScanner.scan(
+      function (result){
+          var str = result.text;
+          
+          getProduct(str); 
+              //$("#barcodereading").val(result.text);
+              //$("#productname").val(obj.stock[0].name);
+              //$("#price").val(obj.stock[0].price);
+                 
+          //alert("We got a barcode\n" +
+            //    "Result: " + result.text + "\n" +
+              //  "Name: " + obj.stock[0].price+ "\n" +
+                //"Cancelled: " + result.cancelled);
+
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      }
+   );
+}
+            
+            function getProduct(barcode){
+                var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=4&barcodereading="+barcode+"";
+                var obj = sendRequest(url);   
+                if(obj.result == 1){
+                       $("#barcodereading").text(barcode);
+                    $("#productname").text(obj.stock[0].name);
+                    $("#price").text(obj.stock[0].price);
+                    alert()
+                }
+                else{
+                    alert("Product not recognized");
+                }
+            }
+        
+          function addorder(){
+            var br = $("#barcodereading").val();
+            var pn = $("#productname").val();
+            var pr = $("#price").val();
+            var qt = $("#quantity").val();
+            var cp = $("#customerphone").val();
+            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"&customerphone="+cp+"";
+            var obj = sendRequest(url);   
+            if(obj.result == 1){
+                
+                //updatestock(br,qt);
+            }
+            else{
+            }
+        }
+            
+            function updatestock(barcode,quantity){
+                var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=6&barcode="+barcode+"&quantity="+quantity+"";
+                var obj = sendRequest(url);
+                if(obj.result == 1){
+            }
+            else{
+            }
+            }
+    </script>
 
     <div data-role="page" id="pageone" data-theme="c">
         <div data-role="header">
@@ -71,87 +152,6 @@
             <h1>Tanoe Concepts</h1>
         </div>
     </div>
-                <script type="text/javascript"> 
-        //$.support.cors = true;
-            
-        /**$(document).ready(function(){
-         $("#scanBtn").click(function(){ 
-            scan();
-        });
-            
-        $("#addorder").click(function(){   
-            addorder();
-        });
-        **/
-            
-        function sendRequest(u){
-            var obj=$.ajax({url:u,async:false});
-            var result=$.parseJSON(obj.responseText);
-            return result;	
-        }
-            
-            
-    function scan(){
-    cordova.plugins.barcodeScanner.scan(
-      function (result){
-          var str = result.text;
-          
-          getProduct(str); 
-              //$("#barcodereading").val(result.text);
-              //$("#productname").val(obj.stock[0].name);
-              //$("#price").val(obj.stock[0].price);
-                 
-          //alert("We got a barcode\n" +
-            //    "Result: " + result.text + "\n" +
-              //  "Name: " + obj.stock[0].price+ "\n" +
-                //"Cancelled: " + result.cancelled);
-
-      }, 
-      function (error) {
-          alert("Scanning failed: " + error);
-      }
-   );
-}
-            
-            function getProduct(barcode){
-                var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=4&barcodereading="+barcode+"";
-                var obj = sendRequest(url);   
-                if(obj.result == 1){
-                       $("#barcodereading").val(barcode);
-                    $("#productname").val(obj.stock[0].name);
-                    $("#price").val(obj.stock[0].price);
-                    alert()
-                }
-                else{
-                    alert("Product not recognized");
-                }
-            }
-        
-          function addorder(){
-            var br = $("#barcodereading").val();
-            var pn = $("#productname").val();
-            var pr = $("#price").val();
-            var qt = $("#quantity").val();
-            var cp = $("#customerphone").val();
-            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"&customerphone="+cp+"";
-            var obj = sendRequest(url);   
-            if(obj.result == 1){
-                
-                //updatestock(br,qt);
-            }
-            else{
-            }
-        }
-            
-            function updatestock(barcode,quantity){
-                var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=6&barcode="+barcode+"&quantity="+quantity+"";
-                var obj = sendRequest(url);
-                if(obj.result == 1){
-            }
-            else{
-            }
-            }
-    </script>
     <div data-role="page" id="pagthree" data-theme="c">
         <div data-role="header">
             <a href="#pageone" data-role="button">Home</a>
