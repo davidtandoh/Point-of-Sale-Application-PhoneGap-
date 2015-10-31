@@ -1,105 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>   
-</head>
-<body>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="jquery-2.1.4.min.js"></script>
-    <script src = "cordova.js"></script>
+<head> 
+    <link rel="stylesheet" href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <link rel="stylesheet" href="pos.css"/>
     <link rel="stylesheet" href="jquery.mobile.icons.min.css"/>
-    <link rel="stylesheet" href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"/>
-    <script src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript"> 
-            
-            
-        $.support.cors = true;
-            
-        $(function(){
-         $("#scanBtn").click(function(){ 
-            scan();
-        });
-            
-        $("#addorder").click(function(){   
-            addorder();
-        });
-            
-        function sendRequest(u){
-            var obj=$.ajax({url:u,async:false});
-            var result=$.parseJSON(obj.responseText);
-            return result;	
-        }
-            
-            
-    function scan(){
-    cordova.plugins.barcodeScanner.scan(
-      function (result) {
-          var str = result.text;
-          var price;
-          
-          $("#barcodereading").text(str);
-          
-          var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=4&barcodereading="+str+"";
-          var obj = sendRequest(url);   
-          if(obj.result == 1){
-              //$("#barcodereading").val(result.text);
-              //$("#productname").val(obj.stock[0].name);
-              //$("#price").val(obj.stock[0].price);
-                 
-          alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Name: " + obj.stock[0].price+ "\n" +
-                "Cancelled: " + result.cancelled);
-
-          }
-            else{
-            }
-          
-         /** alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Name: " + obj.stock[0].price+ "\n" +
-                "Cancelled: " + result.cancelled);
-          $("#reading").val(result.text);**/
-      }, 
-      function (error) {
-          alert("Scanning failed: " + error);
-      }
-   );
-            cordova.plugins.barcodeScanner.encode(cordova.plugins.barcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com", function(success) {
-            alert("encode success: " + success);
-          }, function(fail) {
-            alert("encoding failed: " + fail);
-          }
-        );
-}
-                
-  
-          function addorder(){
-            var br = $("#barcodereading").val();
-            var pn = $("#productname").val();
-            var pr = $("#price").val();
-            var qt = $("#quantity").val();
-            var cp = $("#customerphone").val();
-            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"&customerphone="+cp+"";
-            var obj = sendRequest(url);   
-            if(obj.result == 1){
-                updatestock(br,qt);
-            }
-            else{
-            }
-        }
-            
-            function updatestock(barcode,quantity){
-                var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=6&barcode="+barcode+"&quantity="+quantity+"";
-                var obj = sendRequest(url);
-                if(obj.result == 1){
-            }
-            else{
-            }
-            }
-          
-     });
-        </script>
+    <script src = "cordova.js"></script>
+</head>
+<body>
     <div data-role="page" id="pageone" data-theme="c">
         <div data-role="header">
             <a href="#pageone" data-role="button">Home</a>
@@ -131,6 +40,7 @@
                     
                    
                     <input type="submit" value="Add Order" id="addorder">
+                    <a href="pagetwo" data-role ="button">Proceed to Checkout</a>
                 </div>
             </form>
             
@@ -139,5 +49,102 @@
             <h1>Tanoe Concepts</h1>
         </div>
     </div>
+    <div data-role="page" id="pagtwo" data-theme="c">
+        <div data-role="header">
+            <a href="#pageone" data-role="button">Home</a>
+            <a href="" data-role="button">Options</a>
+            <h1>Tanoe POS</h1>
+            <div data-role="navbar">
+            </div>
+        </div>
+        <div role="main" class = "ui-content">
+            <ul data-role="listview" id="list_cars">
+                <div id="add_item">
+                </div>
+                <li><a href=""> List Item 1</a></li>
+                <li><a href=""> List Item 1</a></li>      
+            </ul>
+        </div>
+        <div data-role="footer">
+            <h1>Tanoe Concepts</h1>
+        </div>
+    </div>
+    <script type="text/javascript"> 
+        //$.support.cors = true;
+            
+        $(function(){
+         $("#scanBtn").click(function(){ 
+            scan();
+        });
+            
+        $("#addorder").click(function(){   
+            addorder();
+        });
+            
+        function sendRequest(u){
+            var obj=$.ajax({url:u,async:false});
+            var result=$.parseJSON(obj.responseText);
+            return result;	
+        }
+            
+            
+    function scan(){
+    cordova.plugins.barcodeScanner.scan(
+      function (result){
+          var str = result.text;
+          var price;
+          
+          $("#barcodereading").val(str);
+          
+          var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=4&barcodereading="+str+"";
+          var obj = sendRequest(url);   
+          if(obj.result == 1){
+              //$("#barcodereading").val(result.text);
+              //$("#productname").val(obj.stock[0].name);
+              //$("#price").val(obj.stock[0].price);
+                 
+          alert("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Name: " + obj.stock[0].price+ "\n" +
+                "Cancelled: " + result.cancelled);
+
+          }
+            else{
+            }
+
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      }
+   );
+}
+        
+          function addorder(){
+            var br = $("#barcodereading").val();
+            var pn = $("#productname").val();
+            var pr = $("#price").val();
+            var qt = $("#quantity").val();
+            var cp = $("#customerphone").val();
+            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"&customerphone="+cp+"";
+            var obj = sendRequest(url);   
+            if(obj.result == 1){
+                
+                //updatestock(br,qt);
+            }
+            else{
+            }
+        }
+            
+            function updatestock(barcode,quantity){
+                var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=6&barcode="+barcode+"&quantity="+quantity+"";
+                var obj = sendRequest(url);
+                if(obj.result == 1){
+            }
+            else{
+            }
+            }
+          
+     });
+    </script>
 </body>
 </html>
