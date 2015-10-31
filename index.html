@@ -47,7 +47,7 @@
         <div role="main" class = "ui-content">
             <form method="post">
                 <div data-role="fieldcontain">
-                    <button id="scanBtn">Scan</button>
+                    <button id="scanBtn" onclick=scan()>Scan</button>
                     <label for="barcodereading">Barcode reading</label>
                     <input type="text" name="barcode" id="barcodereading"/>
                     
@@ -74,7 +74,7 @@
                 <script type="text/javascript"> 
         //$.support.cors = true;
             
-        $(document).ready(function(){
+        /**$(document).ready(function(){
          $("#scanBtn").click(function(){ 
             scan();
         });
@@ -82,6 +82,7 @@
         $("#addorder").click(function(){   
             addorder();
         });
+        **/
             
         function sendRequest(u){
             var obj=$.ajax({url:u,async:false});
@@ -150,8 +151,6 @@
             else{
             }
             }
-          
-     });
     </script>
     <div data-role="page" id="pagthree" data-theme="c">
         <div data-role="header">
