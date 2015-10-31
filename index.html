@@ -44,9 +44,9 @@
             </div>
         </div>
         <div role="main" class = "ui-content">
-            <form method="post">
+            <!--<form method="post">-->
                 <div data-role="fieldcontain">
-                    <button id="scanBtn">Scan</button>
+                    <input type="submit" name="scan" id="scanBtn" value="Scan"/>
                     <label for="barcodereading">Barcode reading</label>
                     <input type="text" name="barcode" id="barcodereading"/>
                     
@@ -62,8 +62,9 @@
                    
                     <button id="addorder">Add To Cart</button>
                     <a href="#pagethree" data-role ="button">Proceed to Checkout</a>
+
                 </div>
-            </form>
+            <!--</form>-->
             
         </div>
         <div data-role="footer">
@@ -141,6 +142,7 @@
                        $("#barcodereading").text(barcode);
                     $("#productname").text(obj.stock[0].name);
                     $("#price").text(obj.stock[0].price);
+                    alert();
                 }
                 else{
                     alert("Product not recognized");
