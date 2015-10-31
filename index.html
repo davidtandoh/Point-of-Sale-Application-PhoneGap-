@@ -80,11 +80,9 @@
             </div>
         </div>
         <div role="main" class = "ui-content">
-            <ul data-role="listview" id="list_cars">
-                <div id="add_item">
-                </div>
-                <li><a href=""> List Item 1</a></li>
-                <li><a href=""> List Item 1</a></li>      
+            <ul data-role="listview" id="listdiv">
+                <div id="orderlist">
+                </div>     
             </ul>
             <label for="customerphone">Customer Phone:</label>
             <input type="text" name="customerphone" id="customerphone"/>
@@ -154,11 +152,19 @@
             var pn = $("#productname").val();
             var pr = $("#price").val();
             var qt = $("#quantity").val();
-            var cp = $("#customerphone").val();
-            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"&customerphone="+cp+"";
+            //var cp = $("#customerphone").val();
+            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"";
             var obj = sendRequest(url);   
             if(obj.result == 1){
+                var output = "";
                 
+                for(var index in obj.waterlevel){
+                    //output += "<li><a href = index.html>";
+                    output += "<li><p>Product Name: "+pn+"<p><br />Price: "+pr+"</p>Quantity: "+qt+"<p></p></li>";
+     
+                }
+                $("#orderlist").html(output);
+                $("#listdiv").listview("refresh");
                 //updatestock(br,qt);
             }
             else{
