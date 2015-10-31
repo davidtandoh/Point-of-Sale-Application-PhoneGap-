@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="pos.css"/>
     <link rel="stylesheet" href="jquery.mobile.icons.min.css"/>
     <script src = "cordova.js"></script>
+    
 </head>
 <body>
     <div data-role="page" id="pageone" data-theme="c">
@@ -44,29 +45,7 @@
             <h1>Tanoe Concepts</h1>
         </div>
     </div>
-    <div data-role="page" id="pagtwo" data-theme="c">
-        <div data-role="header">
-            <a href="#pageone" data-role="button">Home</a>
-            <a href="" data-role="button">Options</a>
-            <h1>Tanoe POS</h1>
-            <div data-role="navbar">
-            </div>
-        </div>
-        <div role="main" class = "ui-content">
-            <ul data-role="listview" id="list_cars">
-                <div id="add_item">
-                </div>
-                <li><a href=""> List Item 1</a></li>
-                <li><a href=""> List Item 1</a></li>      
-            </ul>
-            <label for="customerphone">Customer Phone:</label>
-            <input type="text" name="customerphone" id="customerphone"/>
-        </div>
-        <div data-role="footer">
-            <h1>Tanoe Concepts</h1>
-        </div>
-    </div>
-    <script type="text/javascript"> 
+        <script type="text/javascript"> 
         //$.support.cors = true;
             
         $(function(){
@@ -111,12 +90,9 @@
                 var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=4&barcodereading="+barcode+"";
                 var obj = sendRequest(url);   
                 if(obj.result == 1){
-$(document).on( "pagebeforechange", function() {
                        $("#barcodereading").val(barcode);
                     $("#productname").val(obj.stock[0].name);
                     $("#price").val(obj.stock[0].price);
-});
-
                 }
             }
         
@@ -147,5 +123,27 @@ $(document).on( "pagebeforechange", function() {
           
      });
     </script>
+    <div data-role="page" id="pagtwo" data-theme="c">
+        <div data-role="header">
+            <a href="#pageone" data-role="button">Home</a>
+            <a href="" data-role="button">Options</a>
+            <h1>Tanoe POS</h1>
+            <div data-role="navbar">
+            </div>
+        </div>
+        <div role="main" class = "ui-content">
+            <ul data-role="listview" id="list_cars">
+                <div id="add_item">
+                </div>
+                <li><a href=""> List Item 1</a></li>
+                <li><a href=""> List Item 1</a></li>      
+            </ul>
+            <label for="customerphone">Customer Phone:</label>
+            <input type="text" name="customerphone" id="customerphone"/>
+        </div>
+        <div data-role="footer">
+            <h1>Tanoe Concepts</h1>
+        </div>
+    </div>
 </body>
 </html>
