@@ -103,6 +103,27 @@
         <div role="main" class = "ui-content">
             <form method="post">
                 <div data-role="fieldcontain">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username"/> 
+                    
+                    <label for="Password">Password:</label>
+                    <input type="text" name="password" id="password"/> 
+                    <a href="#pagetwo" data-role="button">Login</a>
+                </div>
+            </form>
+            
+        </div>
+    <div data-role="page" id="pagetwo" data-theme="c">
+        <div data-role="header">
+            <a href="#pageone" data-role="button">Home</a>
+            <a href="" data-role="button">Options</a>
+            <h1>Tanoe POS</h1>
+            <div data-role="navbar">
+            </div>
+        </div>
+        <div role="main" class = "ui-content">
+            <form method="post">
+                <div data-role="fieldcontain">
                     <input type="submit" value="Scan" id="scanBtn">
                     <label for="barcodereading">Barcode reading</label>
                     <input type="text" name="barcode" id="barcodereading"/>
@@ -127,7 +148,7 @@
             <h1>Tanoe Concepts</h1>
         </div>
     </div>
-    <div data-role="page" id="pagtwo" data-theme="c">
+    <div data-role="page" id="pagthree" data-theme="c">
         <div data-role="header">
             <a href="#pageone" data-role="button">Home</a>
             <a href="" data-role="button">Options</a>
