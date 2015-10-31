@@ -30,13 +30,8 @@
                     <label for="price">Price:</label>
                     <input type="text" name="price" id="price"/>
                     
-                    <label for="quantity">Quantity:</label>
-                    <input type="text" name="quantity" id="quantity"/>
-                    
-                    <label for="customerphone">Customer Phone:</label>
-                    <input type="text" name="customerphone" id="customerphone"/> 
-
-                   
+                    <label for="quantity">Enter Quantity:</label>
+                    <input type="text" name="quantity" id="quantity"/>        
                     
                    
                     <input type="submit" value="Add Order" id="addorder">
@@ -64,6 +59,8 @@
                 <li><a href=""> List Item 1</a></li>
                 <li><a href=""> List Item 1</a></li>      
             </ul>
+            <label for="customerphone">Customer Phone:</label>
+            <input type="text" name="customerphone" id="customerphone"/>
         </div>
         <div data-role="footer">
             <h1>Tanoe Concepts</h1>
@@ -114,9 +111,12 @@
                 var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=4&barcodereading="+barcode+"";
                 var obj = sendRequest(url);   
                 if(obj.result == 1){
-                    $("#barcodereading").val(barcode);
+$(document).on( "pagebeforechange", function() {
+                       $("#barcodereading").val(barcode);
                     $("#productname").val(obj.stock[0].name);
                     $("#price").val(obj.stock[0].price);
+});
+
                 }
             }
         
