@@ -156,14 +156,15 @@
             var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"";
             var obj = sendRequest(url);   
             if(obj.result == 1){
+                alert("Successfully added to cart");
                 var output = "";
                 
                 
                     //output += "<li><a href = index.html>";
-                    output += "<li><p>Product Name: "+pn+"<p><br />Price: "+pr+"</p>Quantity: "+qt+"<p></p></li>";
+                    output += "<li><p>Product Name: "+pn+"<p><br />Price: "+pr+"</p><br />Quantity: "+qt+"<p></p></li>";
      
             
-                $("#orderlist").html(output);
+                $("#orderlist").append(output);
                 $("#listdiv").listview("refresh");
                 //updatestock(br,qt);
             }
