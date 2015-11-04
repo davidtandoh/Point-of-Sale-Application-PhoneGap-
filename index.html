@@ -205,7 +205,7 @@
             
          function addsale(){
              var cp = $("#customerphone").val();
-             var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&transactionid="+transactionid+"&expenditure="+totalprice+"&customerphone="+cp+"";
+             var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=9&transactionid="+transactionid+"&expenditure="+totalprice+"&customerphone="+cp+"";
              var obj = sendRequest(url);
             if(obj.result == 1){
                 alert("Sale Made Successfully");
