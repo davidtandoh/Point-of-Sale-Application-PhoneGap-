@@ -160,7 +160,6 @@
                     $("#productname").val(obj.stock[0].name);
                     $("#price").val(obj.stock[0].price);
                     $("#quantity").val(0);
-                    alert();
                 }
                 else{
                     alert("Product not recognized");
@@ -210,6 +209,7 @@
             if(obj.result == 1){
                 alert("Sale Made Successfully");
                 transactionid = 0;
+                totalprice = 0;
             }
          }
             
