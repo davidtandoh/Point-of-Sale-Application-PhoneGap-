@@ -80,12 +80,15 @@
             </div>
         </div>
         <div role="main" class = "ui-content">
+            <label for="customerphone">Customer Phone:</label>
+            <input type="text" name="customerphone" id="customerphone"/> 
+            <label for="price">Total Quantity:</label>
+            <input type="text" name="price" id="price"/>
             <ul data-role="listview" id="listdiv">
                 <div id="orderlist">
                 </div>     
             </ul>
-            <label for="customerphone">Customer Phone:</label>
-            <input type="text" name="customerphone" id="customerphone"/>
+            
         </div>
         <div data-role="footer">
             <h1>Tanoe Concepts</h1>
@@ -94,6 +97,9 @@
              <script type="text/javascript"> 
         //$.support.cors = true;
             
+                 var transactionid = 0;
+                 var totalprice = 0;
+                 
         $(document).ready(function(){
          $("#scanBtn").click(function(){ 
             scan();
@@ -103,6 +109,14 @@
             addorder();
         });
     
+            
+            function create_transid(){
+                var date = new Date();
+                var time = date.getTime();
+                var randomnumber = Math.floor((Math.random()*100)+1)
+                transactionid = ""+time+randomnumber;
+            }
+            
             
         function sendRequest(u){
             var obj=$.ajax({url:u,async:false});
@@ -148,16 +162,23 @@
             }
         
           function addorder(){
+              if(transactionid == 0){
+                  create_transid();
+              }
             var br = $("#barcodereading").val();
             var pn = $("#productname").val();
             var pr = $("#price").val();
             var qt = $("#quantity").val();
+            var orderprice = 0;
+            orderprice = pr*qt;
             //var cp = $("#customerphone").val();
-            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"";
+            var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=5&transactionid="+transactionid+"&barcode="+br+"&name="+pn+"&price="+pr+"&quantity="+qt+"";
             var obj = sendRequest(url);   
             if(obj.result == 1){
-                alert("Successfully added to cart");
+                totalprice = totalprice + orderprice;
+                alert("Successfully added to cart"+orderprice+""+transactionid+"");
                 var output = "";
+            
                 
                 
                     //output += "<li><a href = index.html>";
