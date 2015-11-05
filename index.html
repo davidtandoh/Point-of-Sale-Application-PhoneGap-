@@ -80,16 +80,18 @@
             </div>
         </div>
         <div role="main" class = "ui-content">
-            <label for="customerphone">Customer Phone:</label>
-            <input type="text" name="customerphone" id="customerphone"/> 
-            <label for="expenditure">Total Expenditure:</label>
-            <input type="text" name="expenditure" id="expenditure" disabled="disabled"/>
-            <button id="addsale">Make Sale</button>
+
             <ul data-role="listview" id="listdiv">
                 <div id="orderlist">
                 </div>     
             </ul>
-            
+            <div>
+            <label for="customerphone">Customer Phone:</label>
+            <input type="text" name="customerphone" id="customerphone"/> 
+            <label for="expenditure">Total Expenditure:</label>
+            <input type="text" name="expenditure" id="expenditure"/>
+            <button id="addsale">Checkout</button>
+            </div>
         </div>
         <div data-role="footer">
             <h1>Tanoe Concepts</h1>
@@ -165,6 +167,17 @@
                     alert("Product not recognized");
                 }
             }
+            
+            function addsale(){
+             var cp = $("#customerphone").val();
+             var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=9&transactionid="+transactionid+"&expenditure="+totalprice+"&customerphone="+cp+"";
+             var obj = sendRequest(url);
+            if(obj.result == 1){
+                alert("Sale Made Successfully");
+                transactionid = 0;
+                totalprice = 0;
+            }
+         }
         
           function addorder(){
               if(transactionid == 0){
@@ -201,17 +214,6 @@
         }
             
             
-            
-         function addsale(){
-             var cp = $("#customerphone").val();
-             var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=9&transactionid="+transactionid+"&expenditure="+totalprice+"&customerphone="+cp+"";
-             var obj = sendRequest(url);
-            if(obj.result == 1){
-                alert("Sale Made Successfully");
-                transactionid = 0;
-                totalprice = 0;
-            }
-         }
             
             
             function updatestock(barcode,quantity){
