@@ -213,6 +213,11 @@
                 alert("Sale Made Successfully");
                 transactionid = 0;
                 totalprice = 0;
+                $("#customerphone").val("");
+                $("#listdiv").empty();
+                $("#expenditure").val("")
+                
+                
             }
          }
         
@@ -272,10 +277,10 @@
                         var output = "";
             
                     //output += "<li><a href = index.html>";
-                    output += "<li><p>Transaction ID: "+obj.sales[i].transactionid+"<p><br />Expenditure: "+obj.sales[i].expenditure+"</p><br />Quantity: "+obj.sales[i].customerphone+"<p></p></li>";
+                    output += "<li><p>Transaction ID: "+obj.sales[i].transactionid+"<p><br />Expenditure: "+obj.sales[i].expenditure+"</p><br />Customer Phone: "+obj.sales[i].customerphone+"<p></p></li>";
                     }
                  
-                $("#salesdiv").html(output).listview("refresh");
+                $("#salesdiv").html(output);
                 $("#salesdiv").listview("refresh");
                 $("#saleslist").listview("refresh");  
                 }
