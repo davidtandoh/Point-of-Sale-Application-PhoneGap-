@@ -282,11 +282,12 @@
             
                     //output += "<li><a href = index.html>";
                     output += "<li><p>Transaction ID: "+obj.sales[i].transactionid+"<p><br />Expenditure: "+obj.sales[i].expenditure+"</p><br />Customer Phone: "+obj.sales[i].customerphone+"<p></p></li>";
+                                        $("#salesdiv").html(output);
+                $("#salesdiv").listview("refresh");
+                $("#saleslist").listview("refresh"); 
                     }
                  
-                $("#salesdiv").html(output);
-                $("#salesdiv").listview("refresh");
-                $("#saleslist").listview("refresh");  
+ 
                 }
             }
         });
