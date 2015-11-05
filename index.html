@@ -272,6 +272,7 @@
             }
             
             function loadsales(){
+                $("#salesdiv").empty();
                 var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=10";
             var obj = sendRequest(url);   
             if(obj.result == 1){
@@ -282,7 +283,7 @@
             
                     //output += "<li><a href = index.html>";
                     output += "<li><p>Transaction ID: "+obj.sales[i].transactionid+"<p><br />Expenditure: "+obj.sales[i].expenditure+"</p><br />Customer Phone: "+obj.sales[i].customerphone+"<p></p></li>";
-                                        $("#salesdiv").html(output);
+                $("#salesdiv").append(output);
                 $("#salesdiv").listview("refresh");
                 $("#saleslist").listview("refresh"); 
                     }
