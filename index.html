@@ -242,8 +242,8 @@
                     output += "<li><p>Product Name: "+pn+"<p><br />Price: "+pr+"</p><br />Quantity: "+qt+"<p></p></li>";
      
             
-                $("#salesdiv").append(output).listview("refresh");
-                $("#salesdiv").listview("refresh");
+                $("#listdiv").append(output).listview("refresh");
+                $("#listdiv").listview("refresh");
                 $("#orderlist").listview("refresh");
                 updatestock(br,qt);
             }
@@ -264,7 +264,7 @@
             }
             
             function loadsales(){
-                var url = "controller.php?cmd=10";
+                var url = "http://cs.ashesi.edu.gh/class2016/david-tandoh/MobileWeb/pos/controller.php?cmd=10";
             var obj = sendRequest(url);   
             if(obj.result == 1){
                     var row = "";
@@ -272,15 +272,12 @@
                     for(var i= 0 ;i < obj.sales.length; i++){
                         var output = "";
             
-                row += "<td>"+obj.stock[i].name+"</td>";
-                        row += "<td>"+obj.stock[i].price+"</td>";
-                
                     //output += "<li><a href = index.html>";
                     output += "<li><p>Transaction ID: "+obj.sales[i].transactionid+"<p><br />Expenditure: "+obj.sales[i].expenditure+"</p><br />Quantity: "+obj.sales[i].customerphone+"<p></p></li>";
                     }
                  
-                $("#listdiv").append(output).listview("refresh");
-                $("#listdiv").listview("refresh");
+                $("#salesdiv").append(output).listview("refresh");
+                $("#salesdiv").listview("refresh");
                 $("#saleslist").listview("refresh");  
                 }
             }
