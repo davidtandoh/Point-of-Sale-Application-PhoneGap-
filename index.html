@@ -12,11 +12,7 @@
 <body>
     <div data-role="page" id="pageone" data-theme="c">
         <div data-role="header">
-            <a href="#pageone" data-role="button">Home</a>
-            <a href="" data-role="button">Options</a>
             <h1>Tanoe POS</h1>
-            <div data-role="navbar">
-            </div>
         </div>
         <div role="main" class = "ui-content">
             <form method="post">
@@ -41,12 +37,18 @@
             <a href="" data-role="button">Options</a>
             <h1>Tanoe POS</h1>
             <div data-role="navbar">
+                         <ul>
+                    <li><a href="#pagetwo" data-icon="home" class="ui-btn-active ui-state- persist">Make a Sale</a></li> 
+                    <li><a href="#pagethree" data-icon="star" class="ui-btn-active ui-state- persist">Cart</a></li>
+                    <li><a href="#pagefour" data-icon="star" class="ui-btn-active ui-state- persist">View all Sales</a></li>
+                    
+                </ul>
             </div>
         </div>
         <div role="main" class = "ui-content">
             <!--<form method="post">-->
                 <div data-role="fieldcontain">
-                    <input type="submit" name="scan" id="scanBtn" value="Scan"/>
+                    <input type="submit" name="scan" id="scanBtn" value="Scan" data-icon="camera"/>
                     <label for="barcodereading">Barcode reading</label>
                     <input type="text" name="barcode" id="barcodereading"/>
                     
@@ -60,8 +62,8 @@
                     <input type="text" name="quantity" id="quantity"/>        
                     
                    
-                    <button id="addorder">Add To Cart</button>
-                    <a href="#pagethree" data-role ="button">Proceed to Checkout</a>
+                    <button id="addorder" data-icon="plus">Add To Cart</button>
+                    <a href="#pagethree" data-role ="button" data-icon="arrow-r">Proceed to Checkout</a>
 
                 </div>
             <!--</form>-->
@@ -73,10 +75,14 @@
     </div>
     <div data-role="page" id="pagethree" data-theme="c">
         <div data-role="header">
-            <a href="#pageone" data-role="button">Home</a>
-            <a href="" data-role="button">Options</a>
             <h1>Tanoe POS</h1>
             <div data-role="navbar">
+                        <ul>
+                    <li><a href="#pagetwo" data-icon="home" class="ui-btn-active ui-state- persist">Make a Sale</a></li> 
+                    <li><a href="#pagethree" data-icon="star" class="ui-btn-active ui-state- persist">Cart</a></li>
+                    <li><a href="#pagefour" data-icon="star" class="ui-btn-active ui-state- persist">View all Sales</a></li>
+                    
+                </ul>
             </div>
         </div>
         <div role="main" class = "ui-content">
@@ -86,12 +92,40 @@
                 </div>     
             </ul>
             <div>
+            <br />
             <label for="customerphone">Customer Phone:</label>
             <input type="text" name="customerphone" id="customerphone"/> 
             <label for="expenditure">Total Expenditure:</label>
-            <input type="text" name="expenditure" id="expenditure"/>
-            <button id="addsale">Checkout</button>
+            <input type="text" name="expenditure" id="expenditure" disabled="disabled"/>
+            <button id="addsale" data-icon="plus">Checkout</button>
+            <a href="#pagetwo"  data-role="button" data-icon="arrow-l" data-rel="back">Go Back</a> 
             </div>
+        </div>
+        <div data-role="footer">
+            <h1>Tanoe Concepts</h1>
+        </div>
+    </div>
+        <div data-role="page" id="pagefour" data-theme="c">
+        <div data-role="header">
+            <h1>Tanoe POS</h1>
+            <div data-role="navbar">
+                        <ul>
+                    <li><a href="#pagetwo" data-icon="home" class="ui-btn-active ui-state- persist">Make a Sale</a></li> 
+                    <li><a href="#pagethree" data-icon="star" class="ui-btn-active ui-state- persist">Cart</a></li>
+                    <li><a href="#pagefour" data-icon="star" class="ui-btn-active ui-state- persist">View all Sales</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div role="main" class = "ui-content">
+            <div>
+                 <button id="loadsales" data-icon="refresh">Load/Refresh</button>
+            </div>
+            
+            <ul data-role="listview" id="salesdiv">
+                <div id="saleslist">
+                </div>     
+            </ul>
         </div>
         <div data-role="footer">
             <h1>Tanoe Concepts</h1>
@@ -114,6 +148,10 @@
         
         $("#addsale").click(function(){   
             addsale();
+        });
+            
+        $("#loadsales").click(function(){   
+            loadsales();
         });
     
             
@@ -204,8 +242,8 @@
                     output += "<li><p>Product Name: "+pn+"<p><br />Price: "+pr+"</p><br />Quantity: "+qt+"<p></p></li>";
      
             
-                $("#listdiv").append(output).listview("refresh");
-                $("#listdiv").listview("refresh");
+                $("#salesdiv").append(output).listview("refresh");
+                $("#salesdiv").listview("refresh");
                 $("#orderlist").listview("refresh");
                 updatestock(br,qt);
             }
@@ -223,6 +261,28 @@
             }
             else{
             }
+            }
+            
+            function loadsales(){
+                var url = "controller.php?cmd=10";
+            var obj = sendRequest(url);   
+            if(obj.result == 1){
+                    var row = "";
+                    
+                    for(var i= 0 ;i < obj.sales.length; i++){
+                        var output = "";
+            
+                row += "<td>"+obj.stock[i].name+"</td>";
+                        row += "<td>"+obj.stock[i].price+"</td>";
+                
+                    //output += "<li><a href = index.html>";
+                    output += "<li><p>Transaction ID: "+obj.sales[i].transactionid+"<p><br />Expenditure: "+obj.sales[i].expenditure+"</p><br />Quantity: "+obj.sales[i].customerphone+"<p></p></li>";
+                    }
+                 
+                $("#listdiv").append(output).listview("refresh");
+                $("#listdiv").listview("refresh");
+                $("#saleslist").listview("refresh");  
+                }
             }
         });
     </script>
